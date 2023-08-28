@@ -31,12 +31,10 @@ jobs:
     - name: Checkout setup
       uses: actions/checkout@v2
     - name: Commit changes
-      uses: EndBug/add-and-commit@v7
-      with:
-        add: buildfarm-tools-test/
-        message: 'Update mytext.txt'
-        author_name: github-actions
-        author_email: 41898282+github-actions[bot]@users.noreply.github.com
+      run: |
+        cd buildfarm-tools-test/
+        git add mytext.txt
+        git commit -m "Update mytext.txt"
         
   update_parent:
     name: Update parent
@@ -45,9 +43,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Checkout submodules
-      run: git submodule update --init --recursive
-  #     - name: Git Sumbodule Update
-  #       run: |
-  #         git pull --recurse-submodules
-  #         git submodule update --remote --recursive
+    - name: Git Sumbodule Update
+      run: |
+        git pull --recurse-submodules
+        git submodule update --remote --recursive
