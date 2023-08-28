@@ -1,0 +1,53 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  run_script:
+    name: Run Script
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Run script
+      run: |
+        python3 script.py
+
+  update_submodule:
+    name: Update Submodule
+    needs: [run_script]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout setup
+      uses: actions/checkout@v2
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        add: buildfarm-tools-test/mytext.txt
+        message: 'Update mytext.txt'
+        author_name: github-actions
+        author_email: 41898282+github-actions[bot]@users.noreply.github.com
+        
+  update_parent:
+    name: Update Parent
+    needs: [update_submodule]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Sumbodule Update
+        run: |
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
+
+      
+
+    
