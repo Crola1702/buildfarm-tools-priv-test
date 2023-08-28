@@ -16,6 +16,7 @@ jobs:
           python-version: '3.x'
       - name: Update Submodule
         run: |
+          git submodule update --init --recursive
           python3 script.py
           
           cd buildfarm-tools-test
