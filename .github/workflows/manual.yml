@@ -41,7 +41,7 @@ jobs:
   update_parent:
     name: Update parent
     needs: [update_submodule]
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
