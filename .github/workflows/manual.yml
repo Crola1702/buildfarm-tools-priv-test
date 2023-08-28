@@ -37,17 +37,13 @@ jobs:
         message: 'Update mytext.txt'
         author_name: github-actions
         author_email: 41898282+github-actions[bot]@users.noreply.github.com
-        
-  update_parent:
-    name: Update Parent
-    needs: [update_submodule]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git Sumbodule Update
-        run: |
-          git pull --recurse-submodules
-          git submodule update --remote --recursive
-
-      
-
-    
+       
+  # update_parent:
+  #   name: Update Parent
+  #   needs: [update_submodule]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Git Sumbodule Update
+  #       run: |
+  #         git pull --recurse-submodules
+  #         git submodule update --remote --recursive
