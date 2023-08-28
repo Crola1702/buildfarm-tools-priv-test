@@ -33,7 +33,7 @@ jobs:
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
       with:
-        add: buildfarm-tools-test/mytext.txt
+        add: buildfarm-tools-test/
         message: 'Update mytext.txt'
         author_name: github-actions
         author_email: 41898282+github-actions[bot]@users.noreply.github.com
