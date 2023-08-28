@@ -30,11 +30,15 @@ jobs:
     steps:
     - name: Checkout setup
       uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Commit changes
       run: |
         cd buildfarm-tools-test/
+        ls -a
         git add mytext.txt
         git commit -m "Update mytext.txt"
+        git push
         
   update_parent:
     name: Update parent
