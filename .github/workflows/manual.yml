@@ -16,12 +16,9 @@ jobs:
           python-version: '3.x'
       - name: Update Submodule
         run: |
-          # Navigate into the submodule directory
-          cd buildfarm-tools-test
-
           python3 script.py
-
-          # Commit and push changes to submodule repository
+          
+          cd buildfarm-tools-test
           git config user.name "Crola1702"
           git config user.email "j.arroyo@uniandes.edu.co"
           git add .
