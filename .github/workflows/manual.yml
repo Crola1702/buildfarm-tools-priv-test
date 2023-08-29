@@ -10,10 +10,6 @@ jobs:
     steps:
       - name: Checkout Main Repository
         uses: actions/checkout@v2
-      - name: Checkout Public Repository
-        uses: actions/checkout@v2
-        with:
-          repository: Crola1702/buildfarm-tools-test
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
