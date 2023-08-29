@@ -1,44 +1,32 @@
-name: Update Submodule
+name: Update Public Database
 
 on:
   workflow_dispatch:
 
 jobs:
-  update-submodule:
+  update-public-database:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Main Repository
         uses: actions/checkout@v2
+      - name: Checkout Public Repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: Crola1702/buildfarm-tools-test
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Set up SSH key
+      - name: Check current repository
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Update Submodule
+          ls
+      - name: Check public repository
         run: |
-          git submodule update --init --recursive
+          ls ../buildfarm-tools-test
+      - name: Update Public Database
+        run: |
           python3 script.py
-          
-          cd buildfarm-tools-test
-          git config user.name "Crola1702"
-          git config user.email "j.arroyo@uniandes.edu.co"
-          git add .
-          git commit -m "Update submodule"
-          git push origin HEAD:main
-
-      - name: Commit and Push Main Repository
-        run: |
-          # Commit the submodule reference update
-          git add buildfarm-tools-test
-          git commit -m "Update submodule reference"
-
-          # Push changes to the main repository
-          git push origin main
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
