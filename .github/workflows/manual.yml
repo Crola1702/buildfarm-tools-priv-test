@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Public Repository
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: 
           repository: Crola1702/buildfarm-tools-test
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
@@ -22,11 +22,27 @@ jobs:
       - name: Check current repository
         run: |
           ls
-      - name: Check public repository
+      - name: Clone buildfarm-tools-test
         run: |
-          ls ../buildfarm-tools-test
+          git clone https://oauth2:${{ secrets.GH_TOKEN }}@github.com/Crola1702/buildfarm-tools
+      - name: Check buildfarm-tools-test
+        run: |
+          ls
+      - name: Check buildfarm-tools-test contents
+        run: |
+          ls buildfarm-tools 
       - name: Update Public Database
         run: |
           python3 script.py
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Commit changes
+        run: |
+          git config --global user.name 'Crola1702'
+          git config --global user.email 'j.arroyo@uniandes.edu.co'
+          git add .
+          git commit -m "Update Public Database"
+      - name: Push changes
+        run: |
+          git push origin main
+
