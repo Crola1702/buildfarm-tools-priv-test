@@ -25,7 +25,7 @@ jobs:
           ls
       - name: Check buildfarm-tools-test contents
         run: |
-          ls buildfarm-tools 
+          ls buildfarm-tools-test
       - name: Update Public Database
         run: |
           python3 script.py
