@@ -19,7 +19,7 @@ jobs:
           ls
       - name: Clone buildfarm-tools-test
         run: |
-          git clone https://oauth2:${{ secrets.GH_TOKEN }}@github.com/Crola1702/buildfarm-tools
+          git clone https://oauth2:${{ secrets.GH_TOKEN }}@github.com/Crola1702/buildfarm-tools-test/
       - name: Check buildfarm-tools-test
         run: |
           ls
