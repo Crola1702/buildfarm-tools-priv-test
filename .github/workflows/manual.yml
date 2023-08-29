@@ -31,14 +31,12 @@ jobs:
           python3 script.py
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Commit changes
+      - name: Commit and push changes
         run: |
           cd buildfarm-tools-test
           git config --global user.name 'Crola1702'
           git config --global user.email 'j.arroyo@uniandes.edu.co'
           git add .
           git commit -m "Update Public Database"
-      - name: Push changes
-        run: |
           git push https://${{ secrets.GH_TOKEN }}@github.com/Crola1702/buildfarm-tools-test.git
 
